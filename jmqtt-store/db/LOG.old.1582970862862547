@@ -1,0 +1,189 @@
+2020/02/29-18:07:42.840559 db4 RocksDB version: 5.17.2
+2020/02/29-18:07:42.840651 db4 Git sha rocksdb_build_git_sha:@f438b98e552010613cff8684a7d84191ed785148@
+2020/02/29-18:07:42.840670 db4 Compile date Nov 27 2018
+2020/02/29-18:07:42.840688 db4 DB SUMMARY
+2020/02/29-18:07:42.840794 db4 SST files in db dir, Total Num: 0, files: 
+2020/02/29-18:07:42.840812 db4 Write Ahead Log file in db: 
+2020/02/29-18:07:42.840828 db4                         Options.error_if_exists: 0
+2020/02/29-18:07:42.840844 db4                       Options.create_if_missing: 1
+2020/02/29-18:07:42.840854 db4                         Options.paranoid_checks: 1
+2020/02/29-18:07:42.840865 db4                                     Options.env: 0000000001331EC0
+2020/02/29-18:07:42.840875 db4                                Options.info_log: 000000001B4BFB10
+2020/02/29-18:07:42.841068 db4                Options.max_file_opening_threads: 16
+2020/02/29-18:07:42.841082 db4                              Options.statistics: 0000000000000000
+2020/02/29-18:07:42.841088 db4                               Options.use_fsync: 0
+2020/02/29-18:07:42.841093 db4                       Options.max_log_file_size: 0
+2020/02/29-18:07:42.841097 db4                  Options.max_manifest_file_size: 1073741824
+2020/02/29-18:07:42.841102 db4                   Options.log_file_time_to_roll: 0
+2020/02/29-18:07:42.841106 db4                       Options.keep_log_file_num: 1000
+2020/02/29-18:07:42.841110 db4                    Options.recycle_log_file_num: 0
+2020/02/29-18:07:42.841115 db4                         Options.allow_fallocate: 1
+2020/02/29-18:07:42.841119 db4                        Options.allow_mmap_reads: 1
+2020/02/29-18:07:42.841123 db4                       Options.allow_mmap_writes: 0
+2020/02/29-18:07:42.841127 db4                        Options.use_direct_reads: 0
+2020/02/29-18:07:42.841132 db4                        Options.use_direct_io_for_flush_and_compaction: 0
+2020/02/29-18:07:42.841147 db4          Options.create_missing_column_families: 0
+2020/02/29-18:07:42.841151 db4                              Options.db_log_dir: 
+2020/02/29-18:07:42.841156 db4                                 Options.wal_dir: db
+2020/02/29-18:07:42.841160 db4                Options.table_cache_numshardbits: 6
+2020/02/29-18:07:42.841165 db4                      Options.max_subcompactions: 1
+2020/02/29-18:07:42.841169 db4                  Options.max_background_flushes: -1
+2020/02/29-18:07:42.841173 db4                         Options.WAL_ttl_seconds: 0
+2020/02/29-18:07:42.841178 db4                       Options.WAL_size_limit_MB: 0
+2020/02/29-18:07:42.841182 db4             Options.manifest_preallocation_size: 4194304
+2020/02/29-18:07:42.841187 db4                     Options.is_fd_close_on_exec: 1
+2020/02/29-18:07:42.841191 db4                   Options.advise_random_on_open: 1
+2020/02/29-18:07:42.841195 db4                    Options.db_write_buffer_size: 0
+2020/02/29-18:07:42.841199 db4                    Options.write_buffer_manager: 000000001B4CFD30
+2020/02/29-18:07:42.841204 db4         Options.access_hint_on_compaction_start: 1
+2020/02/29-18:07:42.841208 db4  Options.new_table_reader_for_compaction_inputs: 0
+2020/02/29-18:07:42.841212 db4           Options.random_access_max_buffer_size: 1048576
+2020/02/29-18:07:42.841217 db4                      Options.use_adaptive_mutex: 0
+2020/02/29-18:07:42.841221 db4                            Options.rate_limiter: 000000001B30E8D0
+2020/02/29-18:07:42.841226 db4     Options.sst_file_manager.rate_bytes_per_sec: 0
+2020/02/29-18:07:42.841230 db4                       Options.wal_recovery_mode: 2
+2020/02/29-18:07:42.841234 db4                  Options.enable_thread_tracking: 0
+2020/02/29-18:07:42.841239 db4                  Options.enable_pipelined_write: 0
+2020/02/29-18:07:42.841243 db4         Options.allow_concurrent_memtable_write: 1
+2020/02/29-18:07:42.841247 db4      Options.enable_write_thread_adaptive_yield: 1
+2020/02/29-18:07:42.841251 db4             Options.write_thread_max_yield_usec: 100
+2020/02/29-18:07:42.841256 db4            Options.write_thread_slow_yield_usec: 3
+2020/02/29-18:07:42.841290 db4                               Options.row_cache: None
+2020/02/29-18:07:42.841297 db4                              Options.wal_filter: None
+2020/02/29-18:07:42.841301 db4             Options.avoid_flush_during_recovery: 0
+2020/02/29-18:07:42.841306 db4             Options.allow_ingest_behind: 0
+2020/02/29-18:07:42.841310 db4             Options.preserve_deletes: 0
+2020/02/29-18:07:42.841314 db4             Options.two_write_queues: 0
+2020/02/29-18:07:42.841318 db4             Options.manual_wal_flush: 0
+2020/02/29-18:07:42.841322 db4             Options.max_background_jobs: 2
+2020/02/29-18:07:42.841326 db4             Options.max_background_compactions: 10
+2020/02/29-18:07:42.841331 db4             Options.avoid_flush_during_shutdown: 0
+2020/02/29-18:07:42.841335 db4           Options.writable_file_max_buffer_size: 1048576
+2020/02/29-18:07:42.841339 db4             Options.delayed_write_rate : 10000000
+2020/02/29-18:07:42.841343 db4             Options.max_total_wal_size: 0
+2020/02/29-18:07:42.841347 db4             Options.delete_obsolete_files_period_micros: 21600000000
+2020/02/29-18:07:42.841352 db4                   Options.stats_dump_period_sec: 600
+2020/02/29-18:07:42.841357 db4                          Options.max_open_files: -1
+2020/02/29-18:07:42.841361 db4                          Options.bytes_per_sync: 1048576
+2020/02/29-18:07:42.841365 db4                      Options.wal_bytes_per_sync: 0
+2020/02/29-18:07:42.841369 db4       Options.compaction_readahead_size: 0
+2020/02/29-18:07:42.841373 db4 Compression algorithms supported:
+2020/02/29-18:07:42.841385 db4 	kZSTD supported: 0
+2020/02/29-18:07:42.841389 db4 	kSnappyCompression supported: 0
+2020/02/29-18:07:42.841393 db4 	kBZip2Compression supported: 0
+2020/02/29-18:07:42.841398 db4 	kZlibCompression supported: 0
+2020/02/29-18:07:42.841402 db4 	kLZ4Compression supported: 0
+2020/02/29-18:07:42.841406 db4 	kXpressCompression supported: 0
+2020/02/29-18:07:42.841410 db4 	kLZ4HCCompression supported: 0
+2020/02/29-18:07:42.841414 db4 	kZSTDNotFinalCompression supported: 0
+2020/02/29-18:07:42.841431 db4 Fast CRC32 supported: Supported on x86
+2020/02/29-18:07:42.842173 db4 [c:\users\aretter\code\rocksdb\db\db_impl_open.cc:230] Creating manifest 1 
+2020/02/29-18:07:42.852716 db4 [c:\users\aretter\code\rocksdb\db\version_set.cc:3406] Recovering from manifest file: MANIFEST-000001
+2020/02/29-18:07:42.852878 db4 [c:\users\aretter\code\rocksdb\db\column_family.cc:475] --------------- Options for column family [default]:
+2020/02/29-18:07:42.852890 db4               Options.comparator: leveldb.BytewiseComparator
+2020/02/29-18:07:42.852894 db4           Options.merge_operator: None
+2020/02/29-18:07:42.852898 db4        Options.compaction_filter: None
+2020/02/29-18:07:42.852901 db4        Options.compaction_filter_factory: None
+2020/02/29-18:07:42.852904 db4         Options.memtable_factory: SkipListFactory
+2020/02/29-18:07:42.852907 db4            Options.table_factory: BlockBasedTable
+2020/02/29-18:07:42.852951 db4            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0000000001303D00)
+  cache_index_and_filter_blocks: 1
+  cache_index_and_filter_blocks_with_high_priority: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  pin_top_level_index_and_filter: 1
+  index_type: 0
+  hash_index_allow_collision: 0
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 000000001B30CA70
+  block_cache_name: LRUCache
+  block_cache_options:
+    capacity : 65536
+    num_shard_bits : 10
+    strict_capacity_limit : 0
+    high_pri_pool_ratio: 0.000
+  block_cache_compressed: 0000000000000000
+  persistent_cache: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 5
+  block_restart_interval: 10
+  index_block_restart_interval: 1
+  metadata_block_size: 4096
+  partition_filters: 0
+  use_delta_encoding: 1
+  filter_policy: rocksdb.BuiltinBloomFilter
+  whole_key_filtering: 1
+  verify_compression: 0
+  read_amp_bytes_per_bit: 0
+  format_version: 0
+  enable_index_compression: 1
+  block_align: 0
+2020/02/29-18:07:42.852955 db4        Options.write_buffer_size: 65536
+2020/02/29-18:07:42.852993 db4  Options.max_write_buffer_number: 3
+2020/02/29-18:07:42.852998 db4          Options.compression: NoCompression
+2020/02/29-18:07:42.853001 db4                  Options.bottommost_compression: Disabled
+2020/02/29-18:07:42.853005 db4       Options.prefix_extractor: nullptr
+2020/02/29-18:07:42.853008 db4   Options.memtable_insert_with_hint_prefix_extractor: nullptr
+2020/02/29-18:07:42.853011 db4             Options.num_levels: 7
+2020/02/29-18:07:42.853014 db4        Options.min_write_buffer_number_to_merge: 1
+2020/02/29-18:07:42.853017 db4     Options.max_write_buffer_number_to_maintain: 0
+2020/02/29-18:07:42.853022 db4            Options.bottommost_compression_opts.window_bits: -14
+2020/02/29-18:07:42.853025 db4                  Options.bottommost_compression_opts.level: 32767
+2020/02/29-18:07:42.853028 db4               Options.bottommost_compression_opts.strategy: 0
+2020/02/29-18:07:42.853031 db4         Options.bottommost_compression_opts.max_dict_bytes: 0
+2020/02/29-18:07:42.853034 db4         Options.bottommost_compression_opts.zstd_max_train_bytes: 0
+2020/02/29-18:07:42.853037 db4                  Options.bottommost_compression_opts.enabled: false
+2020/02/29-18:07:42.853041 db4            Options.compression_opts.window_bits: -14
+2020/02/29-18:07:42.853044 db4                  Options.compression_opts.level: 32767
+2020/02/29-18:07:42.853047 db4               Options.compression_opts.strategy: 0
+2020/02/29-18:07:42.853050 db4         Options.compression_opts.max_dict_bytes: 0
+2020/02/29-18:07:42.853053 db4         Options.compression_opts.zstd_max_train_bytes: 0
+2020/02/29-18:07:42.853056 db4                  Options.compression_opts.enabled: false
+2020/02/29-18:07:42.853059 db4      Options.level0_file_num_compaction_trigger: 4
+2020/02/29-18:07:42.853062 db4          Options.level0_slowdown_writes_trigger: 20
+2020/02/29-18:07:42.853065 db4              Options.level0_stop_writes_trigger: 36
+2020/02/29-18:07:42.853068 db4                   Options.target_file_size_base: 67108864
+2020/02/29-18:07:42.853072 db4             Options.target_file_size_multiplier: 1
+2020/02/29-18:07:42.853075 db4                Options.max_bytes_for_level_base: 268435456
+2020/02/29-18:07:42.853078 db4 Options.level_compaction_dynamic_level_bytes: 0
+2020/02/29-18:07:42.853081 db4          Options.max_bytes_for_level_multiplier: 10.000000
+2020/02/29-18:07:42.853090 db4 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2020/02/29-18:07:42.853093 db4 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2020/02/29-18:07:42.853096 db4 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2020/02/29-18:07:42.853099 db4 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2020/02/29-18:07:42.853102 db4 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2020/02/29-18:07:42.853106 db4 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2020/02/29-18:07:42.853108 db4 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2020/02/29-18:07:42.853112 db4       Options.max_sequential_skip_in_iterations: 8
+2020/02/29-18:07:42.853115 db4                    Options.max_compaction_bytes: 1677721600
+2020/02/29-18:07:42.853118 db4                        Options.arena_block_size: 8192
+2020/02/29-18:07:42.853121 db4   Options.soft_pending_compaction_bytes_limit: 68719476736
+2020/02/29-18:07:42.853124 db4   Options.hard_pending_compaction_bytes_limit: 274877906944
+2020/02/29-18:07:42.853127 db4       Options.rate_limit_delay_max_milliseconds: 100
+2020/02/29-18:07:42.853131 db4                Options.disable_auto_compactions: 0
+2020/02/29-18:07:42.853135 db4                        Options.compaction_style: kCompactionStyleUniversal
+2020/02/29-18:07:42.853139 db4                          Options.compaction_pri: kByCompensatedSize
+2020/02/29-18:07:42.853142 db4 Options.compaction_options_universal.size_ratio: 1
+2020/02/29-18:07:42.853145 db4 Options.compaction_options_universal.min_merge_width: 2
+2020/02/29-18:07:42.853148 db4 Options.compaction_options_universal.max_merge_width: 4294967295
+2020/02/29-18:07:42.853151 db4 Options.compaction_options_universal.max_size_amplification_percent: 200
+2020/02/29-18:07:42.853156 db4 Options.compaction_options_universal.compression_size_percent: -1
+2020/02/29-18:07:42.853160 db4 Options.compaction_options_universal.stop_style: kCompactionStopStyleTotalSize
+2020/02/29-18:07:42.853163 db4 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2020/02/29-18:07:42.853167 db4 Options.compaction_options_fifo.allow_compaction: 0
+2020/02/29-18:07:42.853170 db4 Options.compaction_options_fifo.ttl: 0
+2020/02/29-18:07:42.853173 db4                   Options.table_properties_collectors: 
+2020/02/29-18:07:42.853176 db4                   Options.inplace_update_support: 0
+2020/02/29-18:07:42.853179 db4                 Options.inplace_update_num_locks: 10000
+2020/02/29-18:07:42.853182 db4               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2020/02/29-18:07:42.853186 db4   Options.memtable_huge_page_size: 0
+2020/02/29-18:07:42.853189 db4                           Options.bloom_locality: 0
+2020/02/29-18:07:42.853192 db4                    Options.max_successive_merges: 0
+2020/02/29-18:07:42.853195 db4                Options.optimize_filters_for_hits: 0
+2020/02/29-18:07:42.853198 db4                Options.paranoid_file_checks: 0
+2020/02/29-18:07:42.853201 db4                Options.force_consistency_checks: 0
+2020/02/29-18:07:42.853204 db4                Options.report_bg_io_stats: 0
+2020/02/29-18:07:42.853207 db4                               Options.ttl: 0
+2020/02/29-18:07:42.855250 db4 [c:\users\aretter\code\rocksdb\db\version_set.cc:3610] Recovered from manifest file:db/MANIFEST-000001 succeeded,manifest_file_number is 1, next_file_number is 3, last_sequence is 0, log_number is 0,prev_log_number is 0,max_column_family is 0,min_log_number_to_keep is 0
+2020/02/29-18:07:42.855268 db4 [c:\users\aretter\code\rocksdb\db\version_set.cc:3618] Column family [default] (ID 0), log number is 0
+2020/02/29-18:07:42.860468 db4 [c:\users\aretter\code\rocksdb\db\db_impl_open.cc:1287] DB pointer 000000001B50D330

@@ -1,0 +1,84 @@
+2020/02/29-18:07:42.863548 db4 RocksDB version: 5.17.2
+2020/02/29-18:07:42.863592 db4 Git sha rocksdb_build_git_sha:@f438b98e552010613cff8684a7d84191ed785148@
+2020/02/29-18:07:42.863603 db4 Compile date Nov 27 2018
+2020/02/29-18:07:42.863610 db4 DB SUMMARY
+2020/02/29-18:07:42.863687 db4 CURRENT file:  CURRENT
+2020/02/29-18:07:42.863696 db4 IDENTITY file:  IDENTITY
+2020/02/29-18:07:42.863732 db4 MANIFEST file:  MANIFEST-000001 size: 13 Bytes
+2020/02/29-18:07:42.863742 db4 SST files in db dir, Total Num: 0, files: 
+2020/02/29-18:07:42.863749 db4 Write Ahead Log file in db: 000003.log size: 46 ; 
+2020/02/29-18:07:42.863755 db4                         Options.error_if_exists: 0
+2020/02/29-18:07:42.863762 db4                       Options.create_if_missing: 1
+2020/02/29-18:07:42.863963 db4                         Options.paranoid_checks: 1
+2020/02/29-18:07:42.863970 db4                                     Options.env: 0000000001331EC0
+2020/02/29-18:07:42.863974 db4                                Options.info_log: 000000001B4BF340
+2020/02/29-18:07:42.863976 db4                Options.max_file_opening_threads: 16
+2020/02/29-18:07:42.863979 db4                              Options.statistics: 0000000000000000
+2020/02/29-18:07:42.863981 db4                               Options.use_fsync: 0
+2020/02/29-18:07:42.863984 db4                       Options.max_log_file_size: 0
+2020/02/29-18:07:42.863986 db4                  Options.max_manifest_file_size: 1073741824
+2020/02/29-18:07:42.863989 db4                   Options.log_file_time_to_roll: 0
+2020/02/29-18:07:42.864005 db4                       Options.keep_log_file_num: 1000
+2020/02/29-18:07:42.864008 db4                    Options.recycle_log_file_num: 0
+2020/02/29-18:07:42.864010 db4                         Options.allow_fallocate: 1
+2020/02/29-18:07:42.864013 db4                        Options.allow_mmap_reads: 1
+2020/02/29-18:07:42.864015 db4                       Options.allow_mmap_writes: 0
+2020/02/29-18:07:42.864018 db4                        Options.use_direct_reads: 0
+2020/02/29-18:07:42.864020 db4                        Options.use_direct_io_for_flush_and_compaction: 0
+2020/02/29-18:07:42.864022 db4          Options.create_missing_column_families: 0
+2020/02/29-18:07:42.864025 db4                              Options.db_log_dir: 
+2020/02/29-18:07:42.864028 db4                                 Options.wal_dir: db
+2020/02/29-18:07:42.864030 db4                Options.table_cache_numshardbits: 6
+2020/02/29-18:07:42.864032 db4                      Options.max_subcompactions: 1
+2020/02/29-18:07:42.864051 db4                  Options.max_background_flushes: -1
+2020/02/29-18:07:42.864054 db4                         Options.WAL_ttl_seconds: 0
+2020/02/29-18:07:42.864057 db4                       Options.WAL_size_limit_MB: 0
+2020/02/29-18:07:42.864059 db4             Options.manifest_preallocation_size: 4194304
+2020/02/29-18:07:42.864062 db4                     Options.is_fd_close_on_exec: 1
+2020/02/29-18:07:42.864064 db4                   Options.advise_random_on_open: 1
+2020/02/29-18:07:42.864066 db4                    Options.db_write_buffer_size: 0
+2020/02/29-18:07:42.864069 db4                    Options.write_buffer_manager: 000000001B4CAD50
+2020/02/29-18:07:42.864072 db4         Options.access_hint_on_compaction_start: 1
+2020/02/29-18:07:42.864074 db4  Options.new_table_reader_for_compaction_inputs: 0
+2020/02/29-18:07:42.864076 db4           Options.random_access_max_buffer_size: 1048576
+2020/02/29-18:07:42.864079 db4                      Options.use_adaptive_mutex: 0
+2020/02/29-18:07:42.864081 db4                            Options.rate_limiter: 000000001B5B3300
+2020/02/29-18:07:42.864084 db4     Options.sst_file_manager.rate_bytes_per_sec: 0
+2020/02/29-18:07:42.864086 db4                       Options.wal_recovery_mode: 2
+2020/02/29-18:07:42.864088 db4                  Options.enable_thread_tracking: 0
+2020/02/29-18:07:42.864091 db4                  Options.enable_pipelined_write: 0
+2020/02/29-18:07:42.864093 db4         Options.allow_concurrent_memtable_write: 1
+2020/02/29-18:07:42.864096 db4      Options.enable_write_thread_adaptive_yield: 1
+2020/02/29-18:07:42.864113 db4             Options.write_thread_max_yield_usec: 100
+2020/02/29-18:07:42.864117 db4            Options.write_thread_slow_yield_usec: 3
+2020/02/29-18:07:42.864119 db4                               Options.row_cache: None
+2020/02/29-18:07:42.864122 db4                              Options.wal_filter: None
+2020/02/29-18:07:42.864124 db4             Options.avoid_flush_during_recovery: 0
+2020/02/29-18:07:42.864127 db4             Options.allow_ingest_behind: 0
+2020/02/29-18:07:42.864129 db4             Options.preserve_deletes: 0
+2020/02/29-18:07:42.864131 db4             Options.two_write_queues: 0
+2020/02/29-18:07:42.864134 db4             Options.manual_wal_flush: 0
+2020/02/29-18:07:42.864136 db4             Options.max_background_jobs: 2
+2020/02/29-18:07:42.864138 db4             Options.max_background_compactions: 10
+2020/02/29-18:07:42.864141 db4             Options.avoid_flush_during_shutdown: 0
+2020/02/29-18:07:42.864143 db4           Options.writable_file_max_buffer_size: 1048576
+2020/02/29-18:07:42.864146 db4             Options.delayed_write_rate : 10000000
+2020/02/29-18:07:42.864148 db4             Options.max_total_wal_size: 0
+2020/02/29-18:07:42.864150 db4             Options.delete_obsolete_files_period_micros: 21600000000
+2020/02/29-18:07:42.864153 db4                   Options.stats_dump_period_sec: 600
+2020/02/29-18:07:42.864155 db4                          Options.max_open_files: -1
+2020/02/29-18:07:42.864158 db4                          Options.bytes_per_sync: 1048576
+2020/02/29-18:07:42.864160 db4                      Options.wal_bytes_per_sync: 0
+2020/02/29-18:07:42.864162 db4       Options.compaction_readahead_size: 0
+2020/02/29-18:07:42.864165 db4 Compression algorithms supported:
+2020/02/29-18:07:42.864168 db4 	kZSTD supported: 0
+2020/02/29-18:07:42.864170 db4 	kSnappyCompression supported: 0
+2020/02/29-18:07:42.864173 db4 	kBZip2Compression supported: 0
+2020/02/29-18:07:42.864175 db4 	kZlibCompression supported: 0
+2020/02/29-18:07:42.864177 db4 	kLZ4Compression supported: 0
+2020/02/29-18:07:42.864180 db4 	kXpressCompression supported: 0
+2020/02/29-18:07:42.864182 db4 	kLZ4HCCompression supported: 0
+2020/02/29-18:07:42.864185 db4 	kZSTDNotFinalCompression supported: 0
+2020/02/29-18:07:42.864192 db4 Fast CRC32 supported: Supported on x86
+2020/02/29-18:07:42.864527 db4 [c:\users\aretter\code\rocksdb\db\db_impl.cc:365] Shutdown: canceling all background work
+2020/02/29-18:07:42.864546 db4 [c:\users\aretter\code\rocksdb\db\db_impl.cc:521] Shutdown complete

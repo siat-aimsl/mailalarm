@@ -5,16 +5,16 @@ import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Component
+@Service
 public class ScheduledForDynamicCron implements SchedulingConfigurer {
     private String cpucron  = "0 */1 * * * ?";
     private String memcron  = "0 */1 * * * ?";
     private String diskcron = "0 */1 * * * ?";
-    private Monitor monitor = new Monitor();
+
 
     public String getCpuCron() {
         return cpucron;
@@ -43,6 +43,7 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.addTriggerTask(new Runnable() {
+            Monitor monitor = new Monitor();
             @Override
             public void run() {
                 try {
@@ -61,6 +62,7 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
         });
 
         taskRegistrar.addTriggerTask(new Runnable() {
+            Monitor monitor = new Monitor();
             @Override
             public void run() {
                 try {
@@ -79,6 +81,7 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
         });
 
         taskRegistrar.addTriggerTask(new Runnable() {
+            Monitor monitor = new Monitor();
             @Override
             public void run() {
                 try {

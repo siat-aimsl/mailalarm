@@ -83,7 +83,14 @@ public class Monitor {
             while((tmp = read.readLine()) != null){
                 result[num++] = tmp;
             }//总共5行，只需要其中的4行,第4行为数据
+<<<<<<< HEAD
             data = result[3].split("\\s+");
+=======
+            System.out.println("磁盘io" + result[3]);
+
+            data = result[3].split(" ");
+            System.out.println("磁盘io:" + data.length);
+>>>>>>> parent of 96dcf43... change：修正磁盘IO功能
             diskIO = Double.valueOf(data[3]);
 
             return diskIO;

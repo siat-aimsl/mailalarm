@@ -1,6 +1,7 @@
 package org.jmqtt.monitor;
 
 import com.alibaba.fastjson.JSONArray;
+import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import java.io.*;
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 
-
+@Component
 public class Monitor {
 
     ScheduledForDynamicCron scheduledfordynamiccron = new ScheduledForDynamicCron();

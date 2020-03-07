@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class Monitor {
 
         double cpuusage     = monitorCpuusge();
         double availablemem = monitorMem();
-
+        String diskio       = monitorIO();
         try {
             if(cpuusage > 0.01) {
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：CPU使用率已超过0.01：" + cpuusage);
@@ -26,6 +26,7 @@ public class Monitor {
             if(availablemem/1024 > 100){
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：剩余内存不足100MB：" + availablemem);
             }
+            MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度：" + diskio);
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -55,7 +56,26 @@ public class Monitor {
         return availablemem;
     }
 
-    public void monitorIO(){
-
+    public String monitorIO(){
+        InputStream in = null;
+        Process pro = null;
+        String tmp = null;
+        String result = "";
+        try {
+            pro = Runtime.getRuntime().exec("iostat -d -k 1 1");
+            pro.waitFor();
+            in = pro.getInputStream();
+            BufferedReader read = new BufferedReader(new InputStreamReader(in));
+            while((tmp = read.readLine()) != null){
+                result += tmp;
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally{
+            return result;
+        }
     }
 }

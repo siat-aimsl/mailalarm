@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class Monitor {
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void monitorAll(){
 
         double cpuusage     = monitorCpuusge();

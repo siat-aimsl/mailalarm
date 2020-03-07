@@ -9,11 +9,11 @@ import java.util.Properties;
 
 public class MailService {
 
-    private static final String HOST = "smtp.qq.com";
+    private static final String HOST = "smtp.163.com";
     private static final Integer PORT = 465;
-    private static final String USERNAME = "1137465078@qq.com";
-    private static final String PASSWORD = "oekuiigzabgegjii";
-    private static final String emailForm = "1137465078@qq.com";
+    private static final String USERNAME = "t1137465078@163.com";
+    private static final String PASSWORD = "tu13317100";
+    private static final String emailForm = "t1137465078@163.com";
     private static final String timeout = "25000";
     private static JavaMailSenderImpl mailSender = createMailSender();
 
@@ -26,7 +26,7 @@ public class MailService {
         sender.setDefaultEncoding("Utf-8");
         Properties p = new Properties();
         p.setProperty("mail.smtp.timeout", timeout);
-        p.setProperty("mail.smtp.auth", "false");
+        p.setProperty("mail.smtp.auth", "true");
         p.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         sender.setJavaMailProperties(p);
         return sender;

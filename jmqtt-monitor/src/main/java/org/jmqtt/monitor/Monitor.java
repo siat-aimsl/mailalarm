@@ -18,15 +18,17 @@ public class Monitor {
 
         double cpuusage     = monitorCpuusge();
         double availablemem = monitorMem();
-        String diskio       = monitorIO();
+        double diskio       = monitorIO();
         try {
             if(cpuusage > 0.01) {
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：CPU使用率已超过0.01：" + cpuusage);
             }
             if(availablemem/1024 > 100){
-                MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：剩余内存不足100MB：" + availablemem);
+                MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：剩余内存不足100MB：" + availablemem + "KB");
             }
-            MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度：" + diskio);
+            //if(diskio > 1){
+               // MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
+            //}
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -56,26 +58,33 @@ public class Monitor {
         return availablemem;
     }
 
-    public String monitorIO(){
-        InputStream in = null;
-        Process pro = null;
-        String tmp = null;
-        String result = "";
+    public double monitorIO(){
+        InputStream in      = null;
+        Process     pro     = null;
+        String      tmp     = null;
+        String[]    result  = new String[5];
+        String[]    data    = null;
+        double      diskIO  = 0;
+        int         num     = 0;
+
         try {
             pro = Runtime.getRuntime().exec("iostat -d -k 1 1");
             pro.waitFor();
             in = pro.getInputStream();
             BufferedReader read = new BufferedReader(new InputStreamReader(in));
             while((tmp = read.readLine()) != null){
-                result = result + "*" + tmp;
-            }
-            return result;
+                result[num++] = tmp;
+            }//总共5行，只需要其中的4行,第4行为数据
+            data = result[3].split(" ");
+            diskIO = Double.valueOf(data[3].toString());
+            MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + result[3] + "*" + diskIO + "KB/S");
+            return diskIO;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally{
-            return result;
+            return diskIO;
         }
     }
 }

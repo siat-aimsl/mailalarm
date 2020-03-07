@@ -112,7 +112,7 @@ public class Monitor {
             } else {
                 cpusendnum = 0;
             }
-
+            System.out.println("cpusendnum:" + cpusendnum);
             if(cpusendnum < 4){
                 scheduledfordynamiccron.setCpuCron("* */1 * * * ?");
             } else if(cpusendnum < 10){
@@ -139,7 +139,7 @@ public class Monitor {
             } else {
                 memsendnum = 0;
             }
-
+            System.out.println("memsendnum:" + memsendnum);
             if(memsendnum < 4){
                 scheduledfordynamiccron.setMemCron("* */1 * * * ?");
             } else if(memsendnum < 10){
@@ -165,7 +165,7 @@ public class Monitor {
             } else {
                 diskIOsendnum = 0;
             }
-
+            System.out.println("diskIOsendnum:" + diskIOsendnum);
             if(diskIOsendnum < 4){
                 scheduledfordynamiccron.setDiskCron("* */1 * * * ?");
             } else if(diskIOsendnum < 10){

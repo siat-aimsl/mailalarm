@@ -1,21 +1,12 @@
 package org.jmqtt.monitor;
 
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Service;
+//@Service
+//public class ScheduledForDynamicCron implements SchedulingConfigurer {
+    //private String cpucron  = "0 */1 * * * ?";
+    //private String memcron  = "0 */1 * * * ?";
+    //private String diskcron = "0 */1 * * * ?";
 
-import java.util.Date;
-
-@Service
-public class ScheduledForDynamicCron implements SchedulingConfigurer {
-    private String cpucron  = "0 */1 * * * ?";
-    private String memcron  = "0 */1 * * * ?";
-    private String diskcron = "0 */1 * * * ?";
-
-
+/*
     public String getCpuCron() {
         return cpucron;
     }
@@ -98,5 +89,8 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
                 return nextExecDate;
             }
         });
+
+
     }
 }
+*/

@@ -1,29 +1,29 @@
 package org.jmqtt.monitor;
 
 import com.alibaba.fastjson.JSONArray;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.Map;
 
 
 @Component
 public class Monitor {
-
-    ScheduledForDynamicCron scheduledfordynamiccron = new ScheduledForDynamicCron();
-/*
+    int     cpusendnum  = 0;
+    int     memsendnum   = 0;
+    int     diskIOsendnum   = 0;
+    //ScheduledForDynamicCron scheduledfordynamiccron = new ScheduledForDynamicCron();
+    @Scheduled(cron = "0 */1 * * * ?")
     public void monitorAll(){
 
-        int     cpusendnum      = 0;
-        int     memsendnum      = 0;
-        int     diskIOsendnum   = 0;
-        double  cpuusage        = monitorCpuusge();
-        double  availablemem    = monitorMem();
-        double  diskio          = monitorIO();
-
-        try {
+        double  cpuusage        = getCpuusge();
+        double  availablemem    = getMem();
+        //double  diskio          = getDiskIO();
             if(cpuusage > 0.01) {
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：CPU使用率已超过0.01：" + cpuusage);
                 cpusendnum++;
@@ -36,20 +36,15 @@ public class Monitor {
             } else {
                 memsendnum = 0;
             }
-            if(diskio > 1){
-                MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
-                diskIOsendnum++;
-            } else {
-                diskIOsendnum = 0;
-            }
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+            //if(diskio > 1){
+               // MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
+                //diskIOsendnum++;
+            //} else {
+               // diskIOsendnum = 0;
+            //}
 
     }
-*/
+
     public double getCpuusge(){
         Map map = IHttpClient.get("http://127.0.0.1:9002/monitor/metrics/process.cpu.usage");
 
@@ -102,11 +97,10 @@ public class Monitor {
     }
 
     public void monitorCpuusge(){
-        int     cpusendnum  = 0;
+
         double  cpuusage    = getCpuusge();
 
-        try {
-            if(cpuusage > 0.01) {
+            if(cpuusage > 0) {
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：CPU使用率已超过0.01：" + cpuusage);
                 cpusendnum++;
             } else {
@@ -114,26 +108,20 @@ public class Monitor {
             }
             System.out.println("cpusendnum:" + cpusendnum);
             if(cpusendnum < 4){
-                scheduledfordynamiccron.setCpuCron("* */1 * * * ?");
+               // scheduledfordynamiccron.setCpuCron("* */1 * * * ?");
             } else if(cpusendnum < 10){
-                scheduledfordynamiccron.setCpuCron("* */10 * * * ?");
+               // scheduledfordynamiccron.setCpuCron("* */10 * * * ?");
             } else {
-                scheduledfordynamiccron.setCpuCron("* * */1 * * ?");
+                //scheduledfordynamiccron.setCpuCron("* * */1 * * ?");
             }
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
     }
 
     public void monitorMem(){
-        int     memsendnum   = 0;
+
         double  availablemem = getMem();
 
-        try {
-            if(availablemem/1024 > 100){
+            if(availablemem/1024 > 0){
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：剩余内存不足100MB：" + availablemem + "KB");
                 memsendnum++;
             } else {
@@ -141,24 +129,18 @@ public class Monitor {
             }
             System.out.println("memsendnum:" + memsendnum);
             if(memsendnum < 4){
-                scheduledfordynamiccron.setMemCron("* */1 * * * ?");
+               // scheduledfordynamiccron.setMemCron("* */1 * * * ?");
             } else if(memsendnum < 10){
-                scheduledfordynamiccron.setMemCron("* */10 * * * ?");
+               // scheduledfordynamiccron.setMemCron("* */10 * * * ?");
             } else {
-                scheduledfordynamiccron.setMemCron("* * */1 * * ?");
+               // scheduledfordynamiccron.setMemCron("* * */1 * * ?");
             }
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
     }
 
     public void monitorDiskIO(){
-        int     diskIOsendnum   = 0;
+
         double  diskio          = getDiskIO();
 
-        try {
             if(diskio > 1){
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
                 diskIOsendnum++;
@@ -167,16 +149,12 @@ public class Monitor {
             }
             System.out.println("diskIOsendnum:" + diskIOsendnum);
             if(diskIOsendnum < 4){
-                scheduledfordynamiccron.setDiskCron("* */1 * * * ?");
+               // scheduledfordynamiccron.setDiskCron("* */1 * * * ?");
             } else if(diskIOsendnum < 10){
-                scheduledfordynamiccron.setDiskCron("* */10 * * * ?");
+               // scheduledfordynamiccron.setDiskCron("* */10 * * * ?");
             } else {
-                scheduledfordynamiccron.setDiskCron("* * */1 * * ?");
+               // scheduledfordynamiccron.setDiskCron("* * */1 * * ?");
             }
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
     }
+
 }

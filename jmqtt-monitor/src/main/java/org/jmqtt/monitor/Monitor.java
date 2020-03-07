@@ -67,7 +67,7 @@ public class Monitor {
             in = pro.getInputStream();
             BufferedReader read = new BufferedReader(new InputStreamReader(in));
             while((tmp = read.readLine()) != null){
-                result += tmp;
+                result = result + "*" + tmp;
             }
             return result;
         } catch (IOException e) {

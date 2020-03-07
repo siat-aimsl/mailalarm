@@ -78,7 +78,8 @@ public class Monitor {
             System.out.println("磁盘io" + result[3]);
 
             data = result[3].split(" ");
-            diskIO = Double.valueOf(data[3].toString());
+            System.out.println("磁盘io:" + data.length);
+            diskIO = Double.valueOf(data[3]);
             System.out.println("磁盘io:" + diskIO);
 
             return diskIO;

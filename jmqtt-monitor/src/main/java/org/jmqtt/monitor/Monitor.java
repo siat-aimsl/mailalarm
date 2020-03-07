@@ -26,9 +26,9 @@ public class Monitor {
             if(availablemem/1024 > 100){
                 MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：剩余内存不足100MB：" + availablemem + "KB");
             }
-            //if(diskio > 1){
-               // MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
-            //}
+            if(diskio > 1){
+                MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + diskio + "KB/S");
+            }
         } catch (MessagingException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -75,9 +75,11 @@ public class Monitor {
             while((tmp = read.readLine()) != null){
                 result[num++] = tmp;
             }//总共5行，只需要其中的4行,第4行为数据
+            System.out.println("磁盘io" + result[3]);
+
             data = result[3].split(" ");
             diskIO = Double.valueOf(data[3].toString());
-            MailService.sendMail("2953197839@qq.com", "主题：服务警告", "警告：磁盘io写入速度过高：" + result[3] + "*" + diskIO + "KB/S");
+
             return diskIO;
         } catch (IOException e) {
             e.printStackTrace();

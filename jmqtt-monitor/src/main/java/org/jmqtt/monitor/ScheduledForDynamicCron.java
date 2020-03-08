@@ -1,21 +1,13 @@
 package org.jmqtt.monitor;
 
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-
-@Service
-public class ScheduledForDynamicCron implements SchedulingConfigurer {
-    private String cpucron  = "0 */1 * * * ?";
-    private String memcron  = "0 */1 * * * ?";
-    private String diskcron = "0 */1 * * * ?";
+//@Service
+//public class ScheduledForDynamicCron implements SchedulingConfigurer {
+    //private String cpucron  = "0 */1 * * * ?";
+    //private String memcron  = "0 */1 * * * ?";
+    //private String diskcron = "0 */1 * * * ?";
 
 
+/*
     public String getCpuCron() {
         return cpucron;
     }
@@ -39,8 +31,9 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
     public void setDiskCron(String cron) {
         this.diskcron = cron;
     }
+*/
 
-    @Override
+/*    @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.addTriggerTask(new Runnable() {
             Monitor monitor = new Monitor();
@@ -49,14 +42,14 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
                 try {
                     monitor.monitorCpuusge();
                     int cpusendnum = monitor.cpusendnum;
-                    if(cpusendnum < 4){
-                        setCpuCron("0 */1 * * * ?");
-                    } else if(cpusendnum < 10){
-                        setCpuCron("0 */10 * * * ?");
-                    } else {
-                        setCpuCron("0 0 */1 * * ?");
-                    }
-                } catch (Exception e) {
+                    if(cpusendnum < 4){*/
+                        //setCpuCron("0 */1 * * * ?");
+                    //} else if(cpusendnum < 10){
+                     //   setCpuCron("0 */10 * * * ?");
+                   // } else {
+                   //     setCpuCron("0 0 */1 * * ?");
+                   // }
+/*                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -76,13 +69,13 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
                 try {
                     monitor.monitorMem();
                     int memsendnum = monitor.memsendnum;
-                    if(memsendnum < 4){
-                        setMemCron("0 */1 * * * ?");
-                    } else if(memsendnum < 10){
-                        setMemCron("0 */10 * * * ?");
-                    } else {
-                        setMemCron("0 0 */1 * * ?");
-                    }
+                    if(memsendnum < 4){*/
+                   //     setMemCron("0 */1 * * * ?");
+                   // } else if(memsendnum < 10){
+                  //      setMemCron("0 */10 * * * ?");
+                   // } else {
+                   //     setMemCron("0 0 */1 * * ?");
+/*                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -94,7 +87,7 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
                 Date nextExecDate = trigger.nextExecutionTime(triggerContext);
                 return nextExecDate;
             }
-        });
+        });*/
 /*
         taskRegistrar.addTriggerTask(new Runnable() {
             Monitor monitor = new Monitor();
@@ -118,5 +111,5 @@ public class ScheduledForDynamicCron implements SchedulingConfigurer {
  */
 
 
-    }
-}
+   // }
+//}

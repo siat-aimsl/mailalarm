@@ -1,4 +1,4 @@
-package org.jmqtt.monitor;
+package org.jmqtt.client;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -9,20 +9,23 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.jmqtt.response.ActuatorResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class IHttpClient {
+    private static final Logger LOG = LoggerFactory.getLogger(IHttpClient.class);
 
-    public static Map get(String url) {
+    public static ActuatorResponse get(String url) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        Map map = null;
+        ActuatorResponse actuatorResponse = null;
+
         try {
             // 创建httpget.
             HttpGet httpget = new HttpGet(url);
-            System.out.println("executing request " + httpget.getURI());
+            LOG.info("executing request " + httpget.getURI());
             // 执行get请求.
             CloseableHttpResponse response = httpclient.execute(httpget);
             try {
@@ -33,17 +36,15 @@ public class IHttpClient {
                 System.out.println(response.getStatusLine());
                 if (entity != null) {
                     // 打印响应内容长度
-                    System.out.println("Response content length: " + entity.getContentLength());
+                    LOG.info("Response content length: " + entity.getContentLength());
                     // 打印响应内容
                     String content = EntityUtils.toString(entity);
-                    System.out.println("Response content: " + content);
+                    LOG.info("Response content: " + content);
 
-                    map = new LinkedHashMap();
-                    map = JSONObject.parseObject(content, LinkedHashMap.class);
-                    //System.out.println(map);
-                    return map;
+                    actuatorResponse = new JSONObject().parseObject(content,ActuatorResponse.class);
+                    LOG.info(actuatorResponse.toString());
                 }
-                System.out.println("------------------------------------");
+                LOG.info("------------------------------------");
             } finally {
                 response.close();
             }
@@ -60,8 +61,8 @@ public class IHttpClient {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return map;
         }
+        return actuatorResponse;
     }
 
 }

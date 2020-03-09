@@ -1,4 +1,4 @@
-package org.jmqtt.response;
+package org.jmqtt.model.param;
 
 public class Measurement {
     private String statistic;

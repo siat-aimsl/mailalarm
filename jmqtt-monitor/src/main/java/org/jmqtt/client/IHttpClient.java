@@ -9,7 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.jmqtt.response.ActuatorResponse;
+import org.jmqtt.model.response.ActuatorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +31,9 @@ public class IHttpClient {
             try {
                 // 获取响应实体
                 HttpEntity entity = response.getEntity();
-                System.out.println("--------------------------------------");
+                LOG.info("--------------------------------------");
                 // 打印响应状态
-                System.out.println(response.getStatusLine());
+                LOG.info(String.valueOf(response.getStatusLine()));
                 if (entity != null) {
                     // 打印响应内容长度
                     LOG.info("Response content length: " + entity.getContentLength());

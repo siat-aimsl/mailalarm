@@ -1,4 +1,7 @@
-package org.jmqtt.response;
+package org.jmqtt.model.response;
+
+import org.jmqtt.model.param.AvailableTag;
+import org.jmqtt.model.param.Measurement;
 
 import java.util.List;
 

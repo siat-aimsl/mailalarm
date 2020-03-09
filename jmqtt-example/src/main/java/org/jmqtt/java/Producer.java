@@ -5,8 +5,12 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Producer {
+    private static final Logger LOG = LoggerFactory.getLogger(Producer.class);
+
     private static final String broker = "tcp://127.0.0.1:1883";
     private static final String content = "Message from MqttProducer";
     private static final int qos = 1;
@@ -18,7 +22,7 @@ public class Producer {
         for(int i = 0; i < 3; i++){
             MqttMessage mqttMessage = getMqttMessage();
             pubClient.publish(topic,mqttMessage);
-            System.out.println("Send message success.");
+            LOG.info("Send message success.");
         }
     }
 
@@ -34,7 +38,7 @@ public class Producer {
             MqttConnectOptions connectOptions = new MqttConnectOptions();
             connectOptions.setWill("lwt","this is a will message".getBytes(),1,false);
             connectOptions.setCleanSession(true);
-            System.out.println("Connecting to broker: " + broker);
+            LOG.info("Connecting to broker: " + broker);
             pubClient.connect(connectOptions);
             return pubClient;
         } catch (MqttException e) {

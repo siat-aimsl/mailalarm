@@ -1,10 +1,10 @@
 package org.jmqtt.monitor;
 
-import org.jmqtt.config.MailConfig;
-import org.jmqtt.response.ActuatorResponse;
 import org.jmqtt.client.IHttpClient;
-import org.jmqtt.config.MonitorConfig;
+import org.jmqtt.model.response.ActuatorResponse;
 import org.jmqtt.service.MailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -38,9 +38,16 @@ public class Monitor {
     int     memChangeAlarmSendInterval = 0;
     int     memChangeAlarmSendTimeCount = 0;
 
-
-    String  monitorCpuUrl = MonitorConfig.monitorCpuUrl;
-    String  monitorMemUrl = MonitorConfig.monitorMemUrl;
+    @Value("${monitorCpuUrl}")
+    private String  monitorCpuUrl;
+    @Value("${monitorMemUrl}")
+    private String  monitorMemUrl;
+    //@Value("#{'${mailTo}'.split(',')}")
+    //private List<String> emailTo;
+    @Value("${mailTo}")
+    private String emailTo;
+    @Autowired
+    private MailService mailService;
 
     //ScheduledForDynamicCron scheduledfordynamiccron = new ScheduledForDynamicCron();
     @Scheduled(cron = "0 */1 * * * ?")
@@ -125,9 +132,9 @@ public class Monitor {
             cpuUsageAlarmSendInterval = 59;
         }
         if(cpuUsageAlarmNum > 0 && cpuUsageAlarmSendTimeCount == 0){//计数产生间隔时间
-            for (String to: MailConfig.emailTo) {
-                MailService.sendMail(to, "主题：服务警告" + cpuUsageAlarmNum, "警告：CPU使用率已超过0.01：" + cpuUsage);
-            }
+            //for (String to: emailTo) {
+                mailService.sendMail(emailTo, "主题：服务警告" + cpuUsageAlarmNum, "警告：CPU使用率已超过0.01：" + cpuUsage);
+            //}
           cpuUsageAlarmSendTimeCount = cpuUsageAlarmSendInterval;
         } else {
             cpuUsageAlarmSendTimeCount--;
@@ -150,9 +157,9 @@ public class Monitor {
             memAlarmSendInterval = 59;
         }
         if(memAlarmNum > 0 && memAlarmSendTimeCount == 0){//计数产生间隔时间
-            for (String to: MailConfig.emailTo) {
-                MailService.sendMail(to, "主题：服务警告" + memAlarmNum, "警告：剩余内存不足100MB：" + availableMem + "KB");
-            }
+            //for (String to: emailTo) {
+                mailService.sendMail(emailTo, "主题：服务警告" + memAlarmNum, "警告：剩余内存不足100MB：" + availableMem + "KB");
+            //}
            memAlarmSendTimeCount = memAlarmSendInterval;
         } else {
             memAlarmSendTimeCount--;
@@ -175,9 +182,9 @@ public class Monitor {
             diskIOAlarmSendInterval = 59;
         }
         if(diskIOAlarmNum > 0 && diskIOAlarmSendTimeCount == 0){//计数产生间隔时间
-            for (String to: MailConfig.emailTo) {
-                MailService.sendMail(to, "主题：服务警告"+ diskIOAlarmNum, "警告：磁盘io写入速度过高：" + diskIo + "KB/S");
-            }
+            //for (String to: emailTo) {
+                mailService.sendMail(emailTo, "主题：服务警告"+ diskIOAlarmNum, "警告：磁盘io写入速度过高：" + diskIo + "KB/S");
+            //}
             diskIOAlarmSendTimeCount = diskIOAlarmSendInterval;
         } else {
             diskIOAlarmSendTimeCount--;
@@ -201,9 +208,9 @@ public class Monitor {
             cpuUsageChangeAlarmSendInterval = 59;
         }
         if(cpuUsageChangeAlarmNum > 0 && cpuUsageChangeAlarmSendTimeCount == 0){//计数产生间隔时间
-            for (String to: MailConfig.emailTo) {
-                MailService.sendMail(to, "主题：服务警告" + cpuUsageChangeAlarmNum, "警告：CPU使用率在一分钟内升高了0.5以上：" + cpuUsageChange);
-            }
+            //for (String to: emailTo) {
+                mailService.sendMail(emailTo, "主题：服务警告" + cpuUsageChangeAlarmNum, "警告：CPU使用率在一分钟内升高了0.5以上：" + cpuUsageChange);
+            //}
             cpuUsageChangeAlarmSendTimeCount = cpuUsageChangeAlarmSendInterval;
         } else {
             cpuUsageChangeAlarmSendTimeCount--;
@@ -227,9 +234,9 @@ public class Monitor {
             memChangeAlarmSendInterval = 59;
         }
         if(memChangeAlarmNum > 0 && memChangeAlarmSendTimeCount == 0){//计数产生间隔时间
-            for (String to: MailConfig.emailTo) {
-                MailService.sendMail(to, "主题：服务警告" + memChangeAlarmNum, "警告：内存在一分钟内使用超过100MB以上：" + availableMemChange + "MB");
-            }
+            //for (String to: emailTo) {
+                mailService.sendMail(emailTo, "主题：服务警告" + memChangeAlarmNum, "警告：内存在一分钟内使用超过100MB以上：" + availableMemChange + "MB");
+            //}
             memChangeAlarmSendTimeCount = memChangeAlarmSendInterval;
         } else {
             memChangeAlarmSendTimeCount--;

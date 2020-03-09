@@ -5,9 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.rocksdb.*;
 import org.rocksdb.util.SizeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RocksdbStoreTest {
-
+    private static final Logger LOG = LoggerFactory.getLogger(RocksdbStoreTest.class);
     private RocksDB rocksDB;
     private char sep = 1;
 
@@ -83,7 +85,7 @@ public class RocksdbStoreTest {
         hset(key,field2,value2);
         RocksIterator iterator = rocksDB.newIterator();
         for(iterator.seek(key.getBytes());iterator.isValid();iterator.next()){
-            System.out.println(new String(iterator.key()) + "=====" + new String(iterator.value()));
+            LOG.info(new String(iterator.key()) + "=====" + new String(iterator.value()));
         }
     }
 
@@ -102,14 +104,14 @@ public class RocksdbStoreTest {
         String listKey = "listKey";
         for(int i = 0 ; i < 10; i++){
             long rs = rocksDB.getLatestSequenceNumber();
-            System.out.println(rs);
+            LOG.info(String.valueOf(rs));
             byte[] byteKey = (listKey + sep + rs).getBytes();
             rocksDB.put(byteKey,("val"+i).getBytes());
         }
         RocksIterator iterator = rocksDB.newIterator();
 
         for(iterator.seek(listKey.getBytes());iterator.isValid();iterator.next()){
-            System.out.println(new String(iterator.key()) + "========" + new String(iterator.value()));
+            LOG.info(new String(iterator.key()) + "========" + new String(iterator.value()));
         }
     }
 

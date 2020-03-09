@@ -9,6 +9,7 @@ import org.jmqtt.common.config.ClusterConfig;
 import org.jmqtt.common.config.NettyConfig;
 import org.jmqtt.common.config.StoreConfig;
 import org.jmqtt.common.helper.MixAll;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class BrokerStartup {
-
+    private static final Logger LOG = LoggerFactory.getLogger(BrokerStartup.class);
     public static BrokerController start(String[] args) throws Exception {
 
         Options options = buildOptions();
@@ -87,16 +88,16 @@ public class BrokerStartup {
             MixAll.properties2POJO(properties,storeConfig);
             MixAll.properties2POJO(properties, clusterConfig);
         } catch (FileNotFoundException e) {
-            System.out.println("jmqtt.properties cannot find,cause = " + e);
+            LOG.error("jmqtt.properties cannot find,cause = " + e);
         } catch (IOException e) {
-            System.out.println("Handle jmqttConfig IO exception,cause = " + e);
+            LOG.error("Handle jmqttConfig IO exception,cause = " + e);
         } finally {
             try {
                 if(Objects.nonNull(bufferedReader)){
                     bufferedReader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Handle jmqttConfig IO exception,cause = " + e);
+                LOG.error("Handle jmqttConfig IO exception,cause = " + e);
             }
         }
     }

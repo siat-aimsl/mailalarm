@@ -108,7 +108,7 @@ public class BrokerController {
             try {
                 this.abstractMqttStore.init();
             } catch (Exception e) {
-                System.out.println("Init Store failure,exception=" + e);
+                log.info("Init Store failure,exception=" + e);
                 e.printStackTrace();
             }
             this.flowMessageStore = this.abstractMqttStore.getFlowMessageStore();

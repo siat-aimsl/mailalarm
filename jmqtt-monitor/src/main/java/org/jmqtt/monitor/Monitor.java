@@ -235,6 +235,7 @@ public class Monitor {
         } else {
             SendInterval = 59;
         }
+        return SendInterval;
     }
 
 }

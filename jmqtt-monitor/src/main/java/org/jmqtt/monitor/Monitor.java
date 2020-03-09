@@ -45,11 +45,13 @@ public class Monitor {
     int     cpuUsageAlarmSendInterval = 0; //cpuusagealarmsendinterval
     int     cpuUsageAlarmSendTimeCount = 0;
     double  cpuUsage = 0;
+    double  cpuUsageBefore = getCpuUsage();
 
     int     memAlarmNum   = 0;
     int     memAlarmSendInterval = 0;
     int     memAlarmSendTimeCount = 0;
     double  availableMem = 0;
+    double  availableMemBefore = getMem();
 
     int     diskIOAlarmNum   = 0;
     int     diskIOAlarmSendInterval = 0;
@@ -65,14 +67,16 @@ public class Monitor {
 
     @Scheduled(cron = "0 */1 * * * ?")
     public void monitorAll(){
+        cpuUsage = getCpuUsage();
+        availableMem = getMem();
         //---------cpu-------
-        monitorCpuUsage();
+        monitorCpuUsage(cpuUsage);
         //---------mem-------
-        monitorMem();
+        monitorMem(availableMem);
         //---------diskIO-------
         //monitorDiskIO();
-        monitorCpuusgeChange();
-        monitorMemChange();
+        monitorCpuusgeChange(cpuUsage);
+        monitorMemChange(availableMem);
     }
 
     public double getCpuUsage(){
@@ -130,8 +134,7 @@ public class Monitor {
     }
 
     @Async("mailTaskAsyncPool")
-    public void monitorCpuUsage(){
-        cpuUsage = getCpuUsage();
+    public void monitorCpuUsage(double cpuUsage){
 
         if(cpuUsage > cpuUsageThreshold) {//阈值判断
             cpuUsageAlarmNum++;
@@ -156,8 +159,7 @@ public class Monitor {
     }
 
     @Async("mailTaskAsyncPool")
-    public void monitorMem(){
-        availableMem = getMem();
+    public void monitorMem(double availableMem){
 
         if(availableMem/1024 > memThreshold){//阈值判断
             memAlarmNum++;
@@ -208,9 +210,9 @@ public class Monitor {
     }
 
     @Async("mailTaskAsyncPool")
-    public void monitorCpuusgeChange(){
-        double cpuUsageBehind = getCpuUsage();
-        double cpuUsageChange = cpuUsageBehind - cpuUsage;
+    public void monitorCpuusgeChange(double cpuUsageBehind){
+        double cpuUsageChange = cpuUsageBehind - cpuUsageBefore;
+        cpuUsageBefore = cpuUsageBehind;
 
         if(cpuUsageChange > cpuUsageChangeThreshold) {//阈值判断
             cpuUsageChangeAlarmNum++;
@@ -235,9 +237,9 @@ public class Monitor {
     }
 
     @Async("mailTaskAsyncPool")
-    public void monitorMemChange(){
-        double availableMemBehind = getMem();
-        double availableMemChange = availableMem - availableMemBehind;
+    public void monitorMemChange(double availableMemBehind){
+        double availableMemChange = availableMemBefore - availableMemBehind;
+        availableMemBefore = availableMemBehind;
 
         if(availableMemChange/1024 > memChangeThreshold){//阈值判断
             memChangeAlarmNum++;

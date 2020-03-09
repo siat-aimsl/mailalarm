@@ -35,14 +35,10 @@ public class IHttpClient {
                 // 打印响应状态
                 LOG.info(String.valueOf(response.getStatusLine()));
                 if (entity != null) {
-                    // 打印响应内容长度
-                    LOG.info("Response content length: " + entity.getContentLength());
                     // 打印响应内容
                     String content = EntityUtils.toString(entity);
                     LOG.info("Response content: " + content);
-
                     actuatorResponse = new JSONObject().parseObject(content,ActuatorResponse.class);
-                    LOG.info(actuatorResponse.toString());
                 }
                 LOG.info("------------------------------------");
             } finally {

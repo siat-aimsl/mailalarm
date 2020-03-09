@@ -5,6 +5,7 @@ import org.jmqtt.model.response.ActuatorResponse;
 import org.jmqtt.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +13,34 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 
 @Component
 public class Monitor {
+
+    @Value("${monitorCpuUrl}")
+    private String  monitorCpuUrl;
+    @Value("${monitorMemUrl}")
+    private String  monitorMemUrl;
+    @Value("${mailTo}")
+    private List<String> emailTo;
+    @Autowired
+    private MailService mailService;
+
+    @Value("${cpuUsageThreshold}")
+    private double cpuUsageThreshold;
+    @Value("${memThreshold}")
+    private double memThreshold;
+    @Value("${diskIOThreshold}")
+    private double diskIOThreshold;
+    @Value("${cpuUsageChangeThreshold}")
+    private double cpuUsageChangeThreshold;
+    @Value("${memChangeThreshold}")
+    private double memChangeThreshold;
+
+
+
     int     cpuUsageAlarmNum  = 0;
     int     cpuUsageAlarmSendInterval = 0; //cpuusagealarmsendinterval
     int     cpuUsageAlarmSendTimeCount = 0;
@@ -38,18 +63,6 @@ public class Monitor {
     int     memChangeAlarmSendInterval = 0;
     int     memChangeAlarmSendTimeCount = 0;
 
-    @Value("${monitorCpuUrl}")
-    private String  monitorCpuUrl;
-    @Value("${monitorMemUrl}")
-    private String  monitorMemUrl;
-    //@Value("#{'${mailTo}'.split(',')}")
-    //private List<String> emailTo;
-    @Value("${mailTo}")
-    private String emailTo;
-    @Autowired
-    private MailService mailService;
-
-    //ScheduledForDynamicCron scheduledfordynamiccron = new ScheduledForDynamicCron();
     @Scheduled(cron = "0 */1 * * * ?")
     public void monitorAll(){
         //---------cpu-------
@@ -116,10 +129,11 @@ public class Monitor {
         return diskIO;
     }
 
+    @Async("mailTaskAsyncPool")
     public void monitorCpuUsage(){
         cpuUsage = getCpuUsage();
 
-        if(cpuUsage > 0.01) {//阈值判断
+        if(cpuUsage > cpuUsageThreshold) {//阈值判断
             cpuUsageAlarmNum++;
         } else {
             cpuUsageAlarmNum = 0;
@@ -132,19 +146,20 @@ public class Monitor {
             cpuUsageAlarmSendInterval = 59;
         }
         if(cpuUsageAlarmNum > 0 && cpuUsageAlarmSendTimeCount == 0){//计数产生间隔时间
-            //for (String to: emailTo) {
-                mailService.sendMail(emailTo, "主题：服务警告" + cpuUsageAlarmNum, "警告：CPU使用率已超过0.01：" + cpuUsage);
-            //}
+            for (String to: emailTo) {
+                mailService.sendMail(to, "主题：服务警告" + cpuUsageAlarmNum, "警告：CPU使用率已超过0.01：" + cpuUsage);
+            }
           cpuUsageAlarmSendTimeCount = cpuUsageAlarmSendInterval;
         } else {
             cpuUsageAlarmSendTimeCount--;
         }
     }
 
+    @Async("mailTaskAsyncPool")
     public void monitorMem(){
         availableMem = getMem();
 
-        if(availableMem/1024 > 100){//阈值判断
+        if(availableMem/1024 > memThreshold){//阈值判断
             memAlarmNum++;
         } else {
             memAlarmNum = 0;
@@ -157,19 +172,20 @@ public class Monitor {
             memAlarmSendInterval = 59;
         }
         if(memAlarmNum > 0 && memAlarmSendTimeCount == 0){//计数产生间隔时间
-            //for (String to: emailTo) {
-                mailService.sendMail(emailTo, "主题：服务警告" + memAlarmNum, "警告：剩余内存不足100MB：" + availableMem + "KB");
-            //}
+            for (String to: emailTo) {
+                mailService.sendMail(to, "主题：服务警告" + memAlarmNum, "警告：剩余内存不足100MB：" + availableMem + "KB");
+            }
            memAlarmSendTimeCount = memAlarmSendInterval;
         } else {
             memAlarmSendTimeCount--;
         }
     }
 
+    @Async("mailTaskAsyncPool")
     public void monitorDiskIO(){
         double diskIo = getDiskIO();
 
-        if(diskIo > 1) {//阈值判断
+        if(diskIo > diskIOThreshold) {//阈值判断
             diskIOAlarmNum++;
         } else {
             diskIOAlarmNum = 0;
@@ -182,20 +198,21 @@ public class Monitor {
             diskIOAlarmSendInterval = 59;
         }
         if(diskIOAlarmNum > 0 && diskIOAlarmSendTimeCount == 0){//计数产生间隔时间
-            //for (String to: emailTo) {
-                mailService.sendMail(emailTo, "主题：服务警告"+ diskIOAlarmNum, "警告：磁盘io写入速度过高：" + diskIo + "KB/S");
-            //}
+            for (String to: emailTo) {
+                mailService.sendMail(to, "主题：服务警告"+ diskIOAlarmNum, "警告：磁盘io写入速度过高：" + diskIo + "KB/S");
+            }
             diskIOAlarmSendTimeCount = diskIOAlarmSendInterval;
         } else {
             diskIOAlarmSendTimeCount--;
         }
     }
 
+    @Async("mailTaskAsyncPool")
     public void monitorCpuusgeChange(){
         double cpuUsageBehind = getCpuUsage();
         double cpuUsageChange = cpuUsageBehind - cpuUsage;
 
-        if(cpuUsageChange > 0.5) {//阈值判断
+        if(cpuUsageChange > cpuUsageChangeThreshold) {//阈值判断
             cpuUsageChangeAlarmNum++;
         } else {
             cpuUsageChangeAlarmNum = 0;
@@ -208,20 +225,21 @@ public class Monitor {
             cpuUsageChangeAlarmSendInterval = 59;
         }
         if(cpuUsageChangeAlarmNum > 0 && cpuUsageChangeAlarmSendTimeCount == 0){//计数产生间隔时间
-            //for (String to: emailTo) {
-                mailService.sendMail(emailTo, "主题：服务警告" + cpuUsageChangeAlarmNum, "警告：CPU使用率在一分钟内升高了0.5以上：" + cpuUsageChange);
-            //}
+            for (String to: emailTo) {
+                mailService.sendMail(to, "主题：服务警告" + cpuUsageChangeAlarmNum, "警告：CPU使用率在一分钟内升高了0.5以上：" + cpuUsageChange);
+            }
             cpuUsageChangeAlarmSendTimeCount = cpuUsageChangeAlarmSendInterval;
         } else {
             cpuUsageChangeAlarmSendTimeCount--;
         }
     }
 
+    @Async("mailTaskAsyncPool")
     public void monitorMemChange(){
         double availableMemBehind = getMem();
         double availableMemChange = availableMem - availableMemBehind;
 
-        if(availableMemChange/1024 > 100){//阈值判断
+        if(availableMemChange/1024 > memChangeThreshold){//阈值判断
             memChangeAlarmNum++;
         } else {
             memChangeAlarmNum = 0;
@@ -234,9 +252,9 @@ public class Monitor {
             memChangeAlarmSendInterval = 59;
         }
         if(memChangeAlarmNum > 0 && memChangeAlarmSendTimeCount == 0){//计数产生间隔时间
-            //for (String to: emailTo) {
-                mailService.sendMail(emailTo, "主题：服务警告" + memChangeAlarmNum, "警告：内存在一分钟内使用超过100MB以上：" + availableMemChange + "MB");
-            //}
+            for (String to: emailTo) {
+                mailService.sendMail(to, "主题：服务警告" + memChangeAlarmNum, "警告：内存在一分钟内使用超过100MB以上：" + availableMemChange + "MB");
+            }
             memChangeAlarmSendTimeCount = memChangeAlarmSendInterval;
         } else {
             memChangeAlarmSendTimeCount--;

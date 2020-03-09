@@ -140,7 +140,7 @@ public class Monitor {
         }
         if(cpuUsageAlarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             cpuUsageAlarmSendInterval = 0;
-        } else if(cpuUsageAlarmNum <= 10){
+        } else if(cpuUsageAlarmNum <= 25){
             cpuUsageAlarmSendInterval = 9;
         } else {
             cpuUsageAlarmSendInterval = 59;
@@ -166,7 +166,7 @@ public class Monitor {
         }
         if(memAlarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             memAlarmSendInterval = 0;
-        } else if(memAlarmNum <= 10){
+        } else if(memAlarmNum <= 25){
             memAlarmSendInterval = 9;
         } else {
             memAlarmSendInterval = 59;
@@ -192,7 +192,7 @@ public class Monitor {
         }
         if(diskIOAlarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             diskIOAlarmSendInterval = 0;
-        } else if(diskIOAlarmNum <= 10){
+        } else if(diskIOAlarmNum <= 25){
             diskIOAlarmSendInterval = 9;
         } else {
             diskIOAlarmSendInterval = 59;
@@ -219,7 +219,7 @@ public class Monitor {
         }
         if(cpuUsageChangeAlarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             cpuUsageChangeAlarmSendInterval = 0;
-        } else if(cpuUsageChangeAlarmNum <= 10){
+        } else if(cpuUsageChangeAlarmNum <= 25){
             cpuUsageChangeAlarmSendInterval = 9;
         } else {
             cpuUsageChangeAlarmSendInterval = 59;
@@ -246,7 +246,7 @@ public class Monitor {
         }
         if(memChangeAlarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             memChangeAlarmSendInterval = 0;
-        } else if(memChangeAlarmNum <= 10){
+        } else if(memChangeAlarmNum <= 25){
             memChangeAlarmSendInterval = 9;
         } else {
             memChangeAlarmSendInterval = 59;

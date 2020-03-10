@@ -10,31 +10,31 @@ public class AsyncTask {
     @Autowired
     private Monitor monitor;
 
-    @Async("ThreadPool1")
+    @Async("mailTaskAsyncPool")
     public void monitorCpuUsage(double cpuUsage){
 
         monitor.monitorCpuUsage(cpuUsage);
     }
 
-    @Async("ThreadPool1")
+    @Async("mailTaskAsyncPool")
     public void monitorMem(double availableMem){
 
         monitor.monitorMem(availableMem);
     }
 
-    @Async("ThreadPool1")
+    @Async("mailTaskAsyncPool")
     public void monitorDiskIO(){
 
         monitor.monitorDiskIO();
     }
 
-    @Async("ThreadPool1")
+    @Async("mailTaskAsyncPool")
     public void monitorCpuusgeChange(double cpuUsage){
 
         monitor.monitorCpuusgeChange(cpuUsage);
     }
 
-    @Async("ThreadPool1")
+    @Async("mailTaskAsyncPool")
     public void monitorMemChange(double availableMem){
 
         monitor.monitorMemChange(availableMem);

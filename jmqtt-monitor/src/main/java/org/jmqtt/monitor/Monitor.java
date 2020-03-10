@@ -1,13 +1,10 @@
 package org.jmqtt.monitor;
 
-import org.jmqtt.async.AsyncTask;
 import org.jmqtt.client.IHttpClient;
 import org.jmqtt.model.response.ActuatorResponse;
 import org.jmqtt.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -19,7 +16,6 @@ import java.util.List;
 
 @Component
 public class Monitor {
-
     @Value("${monitorCpuUrl}")
     private String  monitorCpuUrl;
     @Value("${monitorMemUrl}")
@@ -38,41 +34,28 @@ public class Monitor {
     private double cpuUsageChangeThreshold;
     @Value("${memChangeThreshold}")
     private double memChangeThreshold;
-    @Autowired
-    private AsyncTask asyncTask;
-    int     cpuUsageAlarmNum  = 0;
-    int     cpuUsageAlarmSendInterval = 0;
-    int     cpuUsageAlarmSendTimeCount = 0;
-    double  cpuUsage = 0;
-    double  cpuUsageBefore = getCpuUsage();
-    int     memAlarmNum   = 0;
-    int     memAlarmSendInterval = 0;
-    int     memAlarmSendTimeCount = 0;
-    double  availableMem = 0;
-    double  availableMemBefore = getMem();
-    int     diskIOAlarmNum   = 0;
-    int     diskIOAlarmSendInterval = 0;
-    int     diskIOAlarmSendTimeCount = 0;
-    int     cpuUsageChangeAlarmNum  = 0;
-    int     cpuUsageChangeAlarmSendInterval = 0;
-    int     cpuUsageChangeAlarmSendTimeCount = 0;
-    int     memChangeAlarmNum   = 0;
-    int     memChangeAlarmSendInterval = 0;
-    int     memChangeAlarmSendTimeCount = 0;
 
-    @Scheduled(cron = "0 */1 * * * ?")
-    public void monitorAll(){
-        cpuUsage = getCpuUsage();
-        availableMem = getMem();
-        //---------cpu-------
-        asyncTask.monitorCpuUsage(cpuUsage);
-        //---------mem-------
-        asyncTask.monitorMem(availableMem);
-        //---------diskIO-------
-        //monitorDiskIO();
-        asyncTask.monitorCpuusgeChange(cpuUsage);
-        asyncTask.monitorMemChange(availableMem);
-    }
+    private int cpuUsageAlarmNum  = 0;
+    private int cpuUsageAlarmSendInterval = 0;
+    private int cpuUsageAlarmSendTimeCount = 0;
+    private double cpuUsage = 0;
+    private double cpuUsageBefore = -1;
+    private int memAlarmNum   = 0;
+    private int memAlarmSendInterval = 0;
+    private int memAlarmSendTimeCount = 0;
+    private double availableMem = 0;
+    private double availableMemBefore = -1;
+    private int diskIOAlarmNum   = 0;
+    private int diskIOAlarmSendInterval = 0;
+    private int diskIOAlarmSendTimeCount = 0;
+    private int cpuUsageChangeAlarmNum  = 0;
+    private int cpuUsageChangeAlarmSendInterval = 0;
+    private int cpuUsageChangeAlarmSendTimeCount = 0;
+    private int memChangeAlarmNum   = 0;
+    private int memChangeAlarmSendInterval = 0;
+    private int memChangeAlarmSendTimeCount = 0;
+
+
 
     public double getCpuUsage(){
         ActuatorResponse actuatorResponse = IHttpClient.get(monitorCpuUrl);
@@ -121,11 +104,9 @@ public class Monitor {
                 }
             }
         }
-
         return diskIO;
     }
 
-    @Async("mailTaskAsyncPool")
     public void monitorCpuUsage(double cpuUsage){
 
         if(cpuUsage > cpuUsageThreshold) {//阈值判断
@@ -144,7 +125,6 @@ public class Monitor {
         }
     }
 
-    @Async("mailTaskAsyncPool")
     public void monitorMem(double availableMem){
 
         if(availableMem/1024 > memThreshold){//阈值判断
@@ -163,7 +143,6 @@ public class Monitor {
         }
     }
 
-    @Async("mailTaskAsyncPool")
     public void monitorDiskIO(){
         double diskIo = getDiskIO();
 
@@ -183,8 +162,10 @@ public class Monitor {
         }
     }
 
-    @Async("mailTaskAsyncPool")
     public void monitorCpuusgeChange(double cpuUsageBehind){
+        if(cpuUsageBefore == -1){
+            cpuUsageBefore = cpuUsageBehind;
+        }
         double cpuUsageChange = cpuUsageBehind - cpuUsageBefore;
         cpuUsageBefore = cpuUsageBehind;
 
@@ -204,8 +185,10 @@ public class Monitor {
         }
     }
 
-    @Async("mailTaskAsyncPool")
     public void monitorMemChange(double availableMemBehind){
+        if(availableMemBefore == -1){
+            availableMemBefore = availableMemBehind;
+        }
         double availableMemChange = availableMemBefore - availableMemBehind;
         availableMemBefore = availableMemBehind;
 

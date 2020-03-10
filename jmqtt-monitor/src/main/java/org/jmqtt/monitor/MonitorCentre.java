@@ -18,12 +18,10 @@ public class MonitorCentre {
     public void monitorAll(){
         cpuUsage = monitor.getCpuUsage();
         availableMem = monitor.getMem();
-        //---------cpu-------
+
         asyncTask.monitorCpuUsage(cpuUsage);
-        //---------mem-------
         asyncTask.monitorMem(availableMem);
-        //---------diskIO-------
-        //monitorDiskIO();
+        asyncTask.monitorDiskIO();
         asyncTask.monitorCpuusgeChange(cpuUsage);
         asyncTask.monitorMemChange(availableMem);
     }

@@ -34,7 +34,10 @@ public class Monitor {
     private double cpuUsageChangeThreshold;
     @Value("${memChangeThreshold}")
     private double memChangeThreshold;
-
+    @Value("${SendInterval_5}")
+    private int SendInterval_5;
+    @Value("${SendInterval_35}")
+    private int SendInterval_35;
     private int cpuUsageAlarmNum  = 0;
     private int cpuUsageAlarmSendInterval = 0;
     private int cpuUsageAlarmSendTimeCount = 0;
@@ -214,9 +217,9 @@ public class Monitor {
         if(alarmNum <= 4) {//根据连续超过阈值次数设定邮件发送间隔时间
             SendInterval = 0;
         } else if(alarmNum <= 25){
-            SendInterval = 9;
+            SendInterval = SendInterval_5 -1;
         } else {
-            SendInterval = 59;
+            SendInterval = SendInterval_35 -1;
         }
         return SendInterval;
     }
